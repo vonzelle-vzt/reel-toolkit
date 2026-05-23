@@ -1,6 +1,6 @@
 {
   "name": "@vonzelle-vzt/reel-toolkit",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Schema-agnostic video editor primitives shared by NextPlay and FlagPlay.",
   "type": "module",
   "license": "UNLICENSED",
@@ -35,6 +35,10 @@
     "./network-profile": {
       "types": "./dist/network-profile/index.d.ts",
       "import": "./dist/network-profile/index.js"
+    },
+    "./tips": {
+      "types": "./dist/tips/index.d.ts",
+      "import": "./dist/tips/index.js"
     }
   },
   "files": [
