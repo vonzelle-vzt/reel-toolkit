@@ -17,4 +17,5 @@ export { reelTypeMeta, } from './reel-type-meta.js';
 export { CopyLinkButton, } from './copy-link-button.js';
 export { ReelCardClipStrip, } from './reel-card-clip-strip.js';
 export { ReelCard, getRelativeTime, } from './reel-card.js';
+export { ContinueEditingCard, } from './continue-editing-card.js';
 //# sourceMappingURL=index.js.map

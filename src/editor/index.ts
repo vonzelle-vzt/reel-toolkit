@@ -39,3 +39,9 @@ export {
   type ReelCardProps,
   type ReelCardData,
 } from './reel-card.js';
+export {
+  ContinueEditingCard,
+  type ContinueEditingCardProps,
+  type ContinueEditingItem,
+  type ContinueEditingReasonKind,
+} from './continue-editing-card.js';

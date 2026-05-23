@@ -16,4 +16,5 @@ export { reelTypeMeta, type ReelTypeMeta, type ReelTypeMetaOptions, } from './re
 export { CopyLinkButton, type CopyLinkButtonProps, } from './copy-link-button.js';
 export { ReelCardClipStrip, type ReelCardClipStripProps, type ReelCardClip, } from './reel-card-clip-strip.js';
 export { ReelCard, getRelativeTime, type ReelCardProps, type ReelCardData, } from './reel-card.js';
+export { ContinueEditingCard, type ContinueEditingCardProps, type ContinueEditingItem, type ContinueEditingReasonKind, } from './continue-editing-card.js';
 //# sourceMappingURL=index.d.ts.map
