@@ -1,6 +1,6 @@
 {
   "name": "@vonzelle-vzt/reel-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Schema-agnostic video editor primitives shared by NextPlay and FlagPlay.",
   "type": "module",
   "license": "UNLICENSED",
@@ -46,6 +46,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
+    "prepare": "node -e \"process.env.npm_lifecycle_event === 'prepare' && !require('fs').existsSync('dist') && require('child_process').spawnSync('npm', ['run', 'build'], { stdio: 'inherit', shell: true })\"",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
