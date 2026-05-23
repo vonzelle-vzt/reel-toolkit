@@ -1,6 +1,6 @@
 {
   "name": "@vonzelle-vzt/reel-toolkit",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Schema-agnostic video editor primitives shared by NextPlay and FlagPlay.",
   "type": "module",
   "license": "UNLICENSED",
@@ -19,6 +19,22 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./editor": {
+      "types": "./dist/editor/index.d.ts",
+      "import": "./dist/editor/index.js"
+    },
+    "./clip-window": {
+      "types": "./dist/clip-window/index.d.ts",
+      "import": "./dist/clip-window/index.js"
+    },
+    "./logic-version": {
+      "types": "./dist/logic-version/index.d.ts",
+      "import": "./dist/logic-version/index.js"
+    },
+    "./network-profile": {
+      "types": "./dist/network-profile/index.d.ts",
+      "import": "./dist/network-profile/index.js"
     }
   },
   "files": [
@@ -32,7 +48,28 @@
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build"
   },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@mux/mux-player-react": "^3.0.0",
+    "lucide-react": ">=0.300.0"
+  },
+  "peerDependenciesMeta": {
+    "@mux/mux-player-react": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@mux/mux-player-react": "^3.13.0",
+    "@types/react": "^19.0.0",
+    "lucide-react": "^0.470.0",
+    "react": "^19.0.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.2"
   },
