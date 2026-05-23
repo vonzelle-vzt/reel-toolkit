@@ -12,4 +12,8 @@
  */
 export { ClipTrimmer, type ClipTrimmerProps } from './clip-trimmer.js';
 export { EnhancedVideoPlayer, type EnhancedVideoPlayerHandle, type EnhancedVideoPlayerProps, } from './video-player-enhanced.js';
+export { reelTypeMeta, type ReelTypeMeta, type ReelTypeMetaOptions, } from './reel-type-meta.js';
+export { CopyLinkButton, type CopyLinkButtonProps, } from './copy-link-button.js';
+export { ReelCardClipStrip, type ReelCardClipStripProps, type ReelCardClip, } from './reel-card-clip-strip.js';
+export { ReelCard, getRelativeTime, type ReelCardProps, type ReelCardData, } from './reel-card.js';
 //# sourceMappingURL=index.d.ts.map

@@ -12,4 +12,9 @@
  */
 export { ClipTrimmer } from './clip-trimmer.js';
 export { EnhancedVideoPlayer, } from './video-player-enhanced.js';
+// v1.2.0 — reel-card primitives + reel-type chip helper
+export { reelTypeMeta, } from './reel-type-meta.js';
+export { CopyLinkButton, } from './copy-link-button.js';
+export { ReelCardClipStrip, } from './reel-card-clip-strip.js';
+export { ReelCard, getRelativeTime, } from './reel-card.js';
 //# sourceMappingURL=index.js.map
