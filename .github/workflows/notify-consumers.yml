@@ -19,6 +19,15 @@ on:
   push:
     tags:
       - 'v*'
+  # Manual dispatch — useful for testing the workflow + for re-running
+  # against an existing tag without re-publishing. Maintainer picks the
+  # tag from the dropdown / types it.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to propagate (e.g. v1.4.0)'
+        required: true
+        type: string
 
 jobs:
   notify:
@@ -34,7 +43,12 @@ jobs:
       - name: Resolve tag
         id: tag
         run: |
-          TAG="${GITHUB_REF#refs/tags/}"
+          # Either from push event (refs/tags/vX.Y.Z) or from workflow_dispatch input.
+          if [ -n "${{ inputs.tag }}" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+          fi
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "Publishing tag: ${TAG}"
 
