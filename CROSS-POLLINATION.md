@@ -3,11 +3,14 @@
 How shared code flows between **NextPlay** and **FlagPlay** through this toolkit.
 Read this BEFORE making changes that touch primitives in either app.
 
-**Status (2026-05-24, v1.4.0):** Cross-pollination is now fully automated.
+**Status (2026-05-24, v1.4.0):** Cross-pollination is now FULLY autonomous.
 Editing a shared primitive in this toolkit → push tag → both consumer apps
-get an auto-PR within ~1 minute via `.github/workflows/notify-consumers.yml`.
-Merge the PR; Vercel auto-deploys. **The maintainer never edits the consumer
-apps' `package.json` toolkit URL by hand.**
+get an auto-PR within ~1 minute via `.github/workflows/notify-consumers.yml`,
+which then **auto-merges the PR + Vercel auto-deploys**. **The maintainer
+never edits, opens, or merges anything on the consumer side.** Every
+toolkit tag is treated as an intentional publish (not a draft) — if a
+release needs human review before consumers adopt it, mark it as a GitHub
+pre-release and comment out the `gh pr merge` step in the workflow.
 
 ## The map (as of 2026-05-23, v1.3.0)
 
@@ -44,14 +47,20 @@ Both apps install via:
 6. `git tag vX.Y.Z`
 7. `git push origin main && git push origin vX.Y.Z`
 
-**That's it.** The `notify-consumers` workflow fires on the tag push and
-opens an auto-PR on both FlagPlay and NextPlay bumping their toolkit URL.
-Review + merge each PR; Vercel auto-deploys. No manual `package.json`
-editing on the consumer side.
+**That's it. Zero further action required.** The `notify-consumers`
+workflow fires on the tag push and:
 
-If the PR fails to open (e.g. PAT expired, consumer repo branch protection
-issue), the workflow logs the failure. Fall back to the manual step:
-edit consumer's `package.json` tarball URL → `npm install` → push → deploy.
+1. Opens an auto-PR on both FlagPlay and NextPlay bumping the tarball URL
+2. **Auto-merges each PR** (`gh pr merge --squash --delete-branch --admin`)
+3. Vercel detects the merge to `main` / `master` and auto-deploys
+
+End-to-end latency: ~3 minutes from `git push --tags` to both production
+apps serving the new toolkit version.
+
+If the workflow fails (e.g. PAT expired, consumer repo branch protection
+blocks the merge, build error in the bumped consumer), the action logs
+the failure and leaves the PR open for manual review. Fall back to:
+`gh pr merge <PR-number> --repo <consumer> --squash --delete-branch`.
 
 ### Scenario B: Add a new primitive
 
