@@ -50,6 +50,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
+    "release": "node scripts/release.mjs",
     "prepare": "node -e \"process.env.npm_lifecycle_event === 'prepare' && !require('fs').existsSync('dist') && require('child_process').spawnSync('npm', ['run', 'build'], { stdio: 'inherit', shell: true })\"",
     "prepublishOnly": "npm run clean && npm run build"
   },

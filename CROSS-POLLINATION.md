@@ -39,13 +39,23 @@ Both apps install via:
 
 ### Scenario A: Edit shared primitive (tips, ReelCard, ClipTrimmer, etc.)
 
-1. Edit `src/<subpath>/<file>.ts` in `reel-toolkit`.
-2. `npm run build` (regenerates `dist/`).
-3. Bump `package.json` version (minor for additive, patch for fixes, major for breaking).
-4. `git add src/<subpath> dist/<subpath> package.json`
-5. `git commit -m "feat(<subpath>): …"`
-6. `git tag vX.Y.Z`
-7. `git push origin main && git push origin vX.Y.Z`
+```bash
+# 1. Edit the file(s).
+# 2. Commit the edits normally:
+git add src/<subpath>
+git commit -m "feat(<subpath>): describe the change"
+
+# 3. Run the release script:
+npm run release -- patch     # bug fix:        1.4.1 → 1.4.2
+npm run release -- minor     # additive:       1.4.1 → 1.5.0
+npm run release -- major     # breaking:       1.4.1 → 2.0.0
+npm run release -- 1.5.0     # explicit version
+```
+
+The release script (`scripts/release.mjs`) handles everything else:
+verifies clean working tree + on `main` + up-to-date with origin, runs
+`npm run build` to regenerate `dist/`, bumps `package.json`, commits as
+`release: vX.Y.Z`, tags, and pushes both main + the tag.
 
 **That's it. Zero further action required.** The `notify-consumers`
 workflow fires on the tag push and:
