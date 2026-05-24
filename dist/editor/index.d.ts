@@ -20,4 +20,5 @@ export { ContinueEditingCard, type ContinueEditingCardProps, type ContinueEditin
 export { PlayerModeTabs, type PlayerModeTabsProps, type PlayerMode, } from './player-mode-tabs.js';
 export { CutLengthTabs, type CutLengthTabsProps, type CutLength, } from './cut-length-tabs.js';
 export { GameContextCard, type GameContextCardProps, type GameContextAnalysis, } from './game-context-card.js';
+export { ReorderableClipList, type ReorderableClipListProps, type ReorderableClip, } from './reorderable-clip-list.js';
 //# sourceMappingURL=index.d.ts.map

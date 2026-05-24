@@ -63,3 +63,11 @@ export {
   type GameContextCardProps,
   type GameContextAnalysis,
 } from './game-context-card.js';
+
+// v1.6.0 — ReorderableClipList drag-to-reorder. Uses @dnd-kit; consumer
+// must have @dnd-kit/core + @dnd-kit/sortable + @dnd-kit/utilities installed.
+export {
+  ReorderableClipList,
+  type ReorderableClipListProps,
+  type ReorderableClip,
+} from './reorderable-clip-list.js';

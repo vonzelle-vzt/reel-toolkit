@@ -23,4 +23,7 @@ export { ContinueEditingCard, } from './continue-editing-card.js';
 export { PlayerModeTabs, } from './player-mode-tabs.js';
 export { CutLengthTabs, } from './cut-length-tabs.js';
 export { GameContextCard, } from './game-context-card.js';
+// v1.6.0 — ReorderableClipList drag-to-reorder. Uses @dnd-kit; consumer
+// must have @dnd-kit/core + @dnd-kit/sortable + @dnd-kit/utilities installed.
+export { ReorderableClipList, } from './reorderable-clip-list.js';
 //# sourceMappingURL=index.js.map
