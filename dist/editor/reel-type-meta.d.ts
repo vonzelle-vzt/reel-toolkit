@@ -24,6 +24,14 @@ export interface ReelTypeMeta {
 export interface ReelTypeMetaOptions {
     /** Override the default label for any reel type. Keys are the enum string. */
     labelOverrides?: Partial<Record<string, string>>;
+    /**
+     * Override the default Tailwind chip class for any reel type. Keys are the
+     * enum string. Use this to swap the toolkit's default palette
+     * (zinc/pink/amber/orange/emerald/green — works in any Tailwind v4 install)
+     * for an app's custom palette (e.g. NextPlay's `accent-*` / `brand-*`).
+     * Apps that don't pass an override get the toolkit defaults.
+     */
+    chipClassOverrides?: Partial<Record<string, string>>;
 }
 export declare function reelTypeMeta(type: string | null | undefined, options?: ReelTypeMetaOptions): ReelTypeMeta;
 //# sourceMappingURL=reel-type-meta.d.ts.map
