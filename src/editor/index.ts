@@ -45,3 +45,21 @@ export {
   type ContinueEditingItem,
   type ContinueEditingReasonKind,
 } from './continue-editing-card.js';
+
+// v1.5.0 — preview-client primitives (extracted from NextPlay's
+// preview-client.tsx so they auto-flow to FlagPlay via toolkit publish).
+export {
+  PlayerModeTabs,
+  type PlayerModeTabsProps,
+  type PlayerMode,
+} from './player-mode-tabs.js';
+export {
+  CutLengthTabs,
+  type CutLengthTabsProps,
+  type CutLength,
+} from './cut-length-tabs.js';
+export {
+  GameContextCard,
+  type GameContextCardProps,
+  type GameContextAnalysis,
+} from './game-context-card.js';

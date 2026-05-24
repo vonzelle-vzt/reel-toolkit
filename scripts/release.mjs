@@ -63,7 +63,7 @@ function ensureCleanTree() {
   }
 }
 
-function ensureMainUpToDate() {
+function ensureMainNotBehind() {
   const branch = execSync('git rev-parse --abbrev-ref HEAD', {
     cwd: ROOT,
     encoding: 'utf8',
@@ -72,17 +72,16 @@ function ensureMainUpToDate() {
     throw new Error(`Not on main (current: ${branch}). Release only from main.`);
   }
   run('git fetch origin main --quiet');
-  const local = execSync('git rev-parse HEAD', {
+  // Local must be at or ahead of origin/main. If origin has commits not in
+  // local, the operator should pull first (their work would be lost).
+  // Local being ahead of origin is normal — we just committed.
+  const behindCount = execSync('git rev-list --count HEAD..origin/main', {
     cwd: ROOT,
     encoding: 'utf8',
   }).trim();
-  const remote = execSync('git rev-parse origin/main', {
-    cwd: ROOT,
-    encoding: 'utf8',
-  }).trim();
-  if (local !== remote) {
+  if (behindCount !== '0') {
     throw new Error(
-      `Local main is not up-to-date with origin/main. Pull first.`,
+      `Local main is ${behindCount} commit(s) behind origin/main. Pull first.`,
     );
   }
 }
@@ -96,7 +95,7 @@ if (!kind) {
 }
 
 ensureCleanTree();
-ensureMainUpToDate();
+ensureMainNotBehind();
 
 const pkg = readPkg();
 const current = pkg.version;
