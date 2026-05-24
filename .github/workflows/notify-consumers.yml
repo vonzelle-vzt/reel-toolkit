@@ -62,8 +62,12 @@ jobs:
       - name: Configure git identity
         working-directory: consumer
         run: |
-          git config user.name "vzt-toolkit-bot"
-          git config user.email "noreply@vonzelle-vzt.com"
+          # Use the github-actions[bot] identity — verified by GitHub, so
+          # Vercel's GitHub integration recognizes it and DOESN'T email the
+          # team owner with the "no GitHub account found" warning every
+          # deploy. The numeric prefix (41898282) is the public bot user id.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Bump tarball URL in package.json
         id: bump
