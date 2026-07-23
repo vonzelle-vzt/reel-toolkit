@@ -41,6 +41,7 @@ export {
 } from './reel-card.js';
 export {
   ContinueEditingCard,
+  type ContinueEditingAction,
   type ContinueEditingCardProps,
   type ContinueEditingItem,
   type ContinueEditingReasonKind,
