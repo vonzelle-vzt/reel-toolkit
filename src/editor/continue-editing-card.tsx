@@ -157,14 +157,24 @@ export function ContinueEditingCard({
           return (
             <li
               key={item.id}
-              className="flex items-center gap-2 pr-2 transition-colors hover:bg-amber-500/5 sm:pr-3"
+              className={cn(
+                'transition-colors hover:bg-amber-500/5',
+                // Actions STACK below the text on mobile and sit inline on
+                // desktop. Inline-at-375px truncated titles to "Jonathan
+                // Perry'…" — the buttons ate the row. Stacking gives the
+                // title the full width and keeps the labels readable
+                // instead of degrading them to bare icons.
+                actions.length > 0
+                  ? 'flex flex-col gap-1 pb-2 sm:flex-row sm:items-center sm:gap-2 sm:pb-0 sm:pr-3'
+                  : 'flex items-center gap-2 pr-2 sm:pr-3',
+              )}
             >
               {/* The link covers thumbnail + text only. Action buttons are
                   SIBLINGS, not children — a <button> inside an <a> is invalid
                   HTML and the anchor swallows the tap on mobile. */}
               <LinkComponent
                 href={item.href}
-                className="flex min-w-0 flex-1 items-center gap-3 py-3 pl-4 sm:pl-5"
+                className="flex min-w-0 flex-1 items-center gap-3 py-3 pl-4 pr-3 sm:pl-5 sm:pr-0"
               >
                 {/* Tiny thumbnail */}
                 <div className="relative h-10 w-16 shrink-0 overflow-hidden rounded-md bg-zinc-800 sm:h-12 sm:w-20">
@@ -195,7 +205,7 @@ export function ContinueEditingCard({
               </LinkComponent>
 
               {actions.length > 0 ? (
-                <div className="flex shrink-0 items-center gap-1">
+                <div className="flex shrink-0 items-center justify-end gap-1 pl-4 pr-2 sm:pl-0 sm:pr-0">
                   {actions.map((action) => (
                     <ActionButton key={action.key} action={action} />
                   ))}
