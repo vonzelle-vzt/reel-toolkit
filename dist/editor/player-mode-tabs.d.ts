@@ -1,9 +1,9 @@
 import * as React from 'react';
-export type PlayerMode = 'clips' | 'produced' | 'movie';
+export type PlayerMode = 'clips' | 'produced' | 'movie' | 'hype';
 export interface PlayerModeTabsProps {
     mode: PlayerMode;
     onChange: (next: PlayerMode) => void;
-    /** Which modes to render. Default: all three. */
+    /** Which modes to render. Default: all four. */
     modes?: ReadonlyArray<PlayerMode>;
     /** Override the default labels. */
     labelOverrides?: Partial<Record<PlayerMode, string>>;

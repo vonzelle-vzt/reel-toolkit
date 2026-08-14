@@ -1,7 +1,8 @@
 /**
- * PlayerModeTabs — 3-tab segmented control for switching between the reel's
- * playback modes: Clips (raw MuxPlayer clip-by-clip), Highlight (cinematic
- * Remotion-produced version), Movie (NFL Films-style cinematic letterbox).
+ * PlayerModeTabs — segmented control for switching between a reel's playback
+ * modes: Clips (raw MuxPlayer clip-by-clip), Highlight (cinematic
+ * Remotion-produced version), Movie (NFL Films-style cinematic letterbox),
+ * and Hype (~30s vertical social cut of only the best plays).
  *
  * Pure presentation primitive — schema-agnostic. The consumer owns:
  *   - which modes are available (some reels don't have a produced Movie
@@ -9,14 +10,20 @@
  *   - the active mode state
  *   - what happens on change
  *
- * The internal mode keys (`clips` / `produced` / `movie`) are LOAD-BEARING
- * for NextPlay's share-link `?view=…` query param (introduced v5.6) and the
- * public reel viewer's mode detection. Don't rename them without updating
- * `apps/web/src/app/(public)/reel/[token]/reel-viewer.tsx` in NextPlay AND
- * `apps/web/src/app/reel/[token]/page.tsx` in FlagPlay.
+ * The internal mode keys (`clips` / `produced` / `movie` / `hype`) are
+ * LOAD-BEARING for NextPlay's share-link `?view=…` query param (introduced
+ * v5.6) and the public reel viewer's mode detection. Don't rename them without
+ * updating `apps/web/src/app/(public)/reel/[token]/reel-viewer.tsx` in NextPlay
+ * AND `apps/web/src/app/reel/[token]/page.tsx` in FlagPlay.
  *
  * Label vocabulary: NextPlay v6.34 dropped "Social" / "Produced" in favor of
- * "Highlight" for the produced mode. The toolkit defaults match.
+ * "Highlight" for the produced mode. The toolkit defaults match. `hype` is
+ * labelled "Hype" rather than "Hype Reel" so the four tabs still fit a 375px
+ * viewport, which is this product's build target.
+ *
+ * ADDING A MODE IS ADDITIVE, NEVER A RENAME. Consumers pin this package by
+ * tarball tag, so a mode key that disappears breaks whichever app upgrades
+ * last. `hype` was appended in v1.8.0; `DEFAULT_MODES` grew, nothing moved.
  */
 'use client';
 import { jsx as _jsx } from "react/jsx-runtime";
@@ -26,8 +33,14 @@ const DEFAULT_LABELS = {
     clips: 'Clips',
     produced: 'Highlight',
     movie: 'Movie',
+    hype: 'Hype',
 };
-const DEFAULT_MODES = ['clips', 'produced', 'movie'];
+const DEFAULT_MODES = [
+    'clips',
+    'produced',
+    'movie',
+    'hype',
+];
 export function PlayerModeTabs({ mode, onChange, modes = DEFAULT_MODES, labelOverrides, className, }) {
     return (_jsx("div", { className: cn('flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-1 w-fit', className), role: "tablist", "aria-label": "Reel playback mode", children: modes.map((m) => (_jsx("button", { type: "button", role: "tab", "aria-selected": mode === m, onClick: () => onChange(m), className: cn('rounded-md px-3 py-1.5 text-xs font-medium transition-colors', mode === m
                 ? 'bg-zinc-800 text-amber-400'
